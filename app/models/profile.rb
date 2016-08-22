@@ -8,4 +8,6 @@ class Profile < ApplicationRecord
 	has_many :tokens
 
 	validates :login, uniqueness: true, presence: true
+
+	
 end

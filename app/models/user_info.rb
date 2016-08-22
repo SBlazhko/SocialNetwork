@@ -1,4 +1,5 @@
 class UserInfo < ApplicationRecord
-
-	belongs_to :profile
+  
+  belongs_to :profile
+  
 end

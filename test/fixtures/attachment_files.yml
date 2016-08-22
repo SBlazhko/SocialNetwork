@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  access_level: 1
+  file_type: MyString
+  file_name: MyString
+  file_url: MyString
+
+two:
+  access_level: 1
+  file_type: MyString
+  file_name: MyString
+  file_url: MyString

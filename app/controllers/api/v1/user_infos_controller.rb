@@ -1,35 +1,56 @@
 class Api::V1::UserInfosController < ApplicationController
 
-  
+  before_action :set_info, only: [:show, :update, :destroy]
+  before_action :set_json, only: [:create, :update]
+
+
   def show
-    respond_to do |format|
-      format.json {render json: "test", status: 200}
+    arr = {}
+    level = params[:accsses_level]
+    data = @info.data
+    data.each do |key, value|
+      arr[key] = value if value["accsses_level"] == level
     end
+    render json: arr, status: :ok
   end
-  
+
+
   def create
-    body = request.body.string
-      res = JSON.parse(body)
-    res["user_info"].each do |key, value|
-      info = UserInfo.new
-      info.key = key
-      info.value = value
-      info.save
+    @info = UserInfo.new
+    @info.data = @json
+    if @info.save
+      render json: @info, status: :created
+    else
+      render json: @info.errors, status:  :unprocessable_entity
     end
-
   end
 
-  def edit
-    
+
+  def update
+    if @info.update(data: @json)
+      render json: @info, status: :ok
+    else
+      render json: @info.errors, status: :unprocessable_entity
+    end
   end
 
   
   def destroy
-    
+    if @info.destroy
+      render json: { status: :ok }
+    else
+      render json: @info.errors, status: :unprocessable_entity
+    end
   end
 
+
   private
-  def info_params
-    params.require(:userinfo).permit(:key, :value, :access_level, :profile_id)
+
+  def set_json
+    @json = JSON.parse(request.body.read)
+  end
+
+  def set_info
+    @info = UserInfo.find(params[:id])
   end
 end

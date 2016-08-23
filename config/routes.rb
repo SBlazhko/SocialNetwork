@@ -3,7 +3,12 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
       resources :profile
-      resources :user_infos
+      controller :user_infos do
+        get 'info' => :show
+        post 'info/add' => :create
+        put 'info/edit' => :update
+        delete 'info/remove' => :destroy
+      end
     end
   end
 end

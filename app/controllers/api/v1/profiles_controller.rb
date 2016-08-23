@@ -1,5 +1,7 @@
 class  Api::V1::ProfilesController < ApplicationController
 
+	skip_before_action :authentificate!, only: [:create]
+
 	def show 
 		respond_to do |format|
 			format.json {render json: Profile.find(current_user.id)}
@@ -40,7 +42,7 @@ class  Api::V1::ProfilesController < ApplicationController
 	def destroy 
 		respond_to do |format|
 			if current_user.destroy
-				format.json {render json: {success: 'user destoyed'}, status: 200}
+				format.json {render json: {success: 'user destoyed'}, status: 204}
 			else
 				format.json {render json: {errors: current_user.errors}, status: 422}
 			end

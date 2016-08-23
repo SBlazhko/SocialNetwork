@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
 	include ActionController::MimeResponds
 
-	before_action :authentificate!, only: [:destroy, :update]
+	before_action :authentificate!
 
 	def authentificate!
 		if Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])

@@ -40,7 +40,7 @@ class  Api::V1::ProfilesController < ApplicationController
 	def destroy 
 		respond_to do |format|
 			if current_user.destroy
-				format.json { head :no_content, status: 200}
+				format.json {render json: {success: 'user destoyed'}, status: 200}
 			else
 				format.json {render json: {errors: current_user.errors}, status: 422}
 			end

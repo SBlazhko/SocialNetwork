@@ -1,11 +1,8 @@
 class  Api::V1::ProfilesController < ApplicationController
 
-	# before_action :authenticate, except: [:index, :create]
-	before_action :authenticate_user!, only: [:update, :destroy]
-
 	def show 
 		respond_to do |format|
-			format.json {render json: Profile.find(params[:id])}
+			format.json {render json: Profile.find(current_user.id)}
 		end
 	end
 
@@ -20,7 +17,6 @@ class  Api::V1::ProfilesController < ApplicationController
 		profile.save
 		token = Token.new
 		token.profile_id = profile.id
-		# binding.pry
 		token.token = token.generate_unique_secure_token
 		respond_to do |format|
 			if token.save
@@ -32,23 +28,21 @@ class  Api::V1::ProfilesController < ApplicationController
 	end
 
 	def update
-		profile = Profile.find(params[:id])
 		respond_to do |format|
-			if profile.update(profile_params)
-				format.json {render json: profile, status: 200}
+			if current_user.update(profile_params)
+				format.json {render json: current_user, status: 200}
 			else
-				format.json {render json: {errors: profile.errors}, status: 422}
+				format.json {render json: {errors: current_user.errors}, status: 422}
 			end
 		end
 	end
 
 	def destroy 
-		profile = Profile.find(params[:id])
 		respond_to do |format|
-			if profile.destroy
+			if current_user.destroy
 				format.json { head :no_content, status: 200}
 			else
-				format.json {render json: {errors: profile.errors}, status: 422}
+				format.json {render json: {errors: current_user.errors}, status: 422}
 			end
 		end
 	end

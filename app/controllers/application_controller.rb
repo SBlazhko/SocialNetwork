@@ -1,12 +1,17 @@
 class ApplicationController < ActionController::API
 	include ActionController::MimeResponds
 
+	before_action :authentificate!, only: [:show, :destroy, :update]
 
-	private
+	def authentificate!
+		if Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
+		else 
+			render json: {error: 'token invalid'}, status: 401 
+		end
+	end
 
-	def authenticate_user!
-	  binding.pry
-	  client_token = Token.find_by(token: token)
-	  profile = Profile.find_by(client_token.profile_id) 
+	def current_user
+		token = Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
+		token.profile if token
 	end
 end

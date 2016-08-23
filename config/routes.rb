@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   		resources :profiles, only: [:index, :create, :show, :update, :destroy] do
   			resources :posts
   		end
-  		resources :tokens, only: [:create, :destroy]
+  		post "tokens/login", to: "tokens#login"
+  		post "tokens/logout", to: "tokens#logout"
 	end
   end
 end

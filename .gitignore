@@ -17,3 +17,10 @@
 !/log/.keep
 !/tmp/.keep
 /.idea/*
+
+public
+db/schema.rb
+Gemfile.lock
+
+# Ignore Byebug command history file.
+.byebug_history

@@ -16,8 +16,8 @@ class Api::V1::UserInfosController < ApplicationController
 
 
   def create
-    @info = UserInfo.new
-    @info.data = @json
+    @info = UserInfo.new(info_params)
+    @info.data = @json["data"]
     if @info.save
       render json: @info, status: :created
     else
@@ -27,7 +27,7 @@ class Api::V1::UserInfosController < ApplicationController
 
 
   def update
-    if @info.update(data: @json)
+    if @info.update(info_params)
       render json: @info, status: :ok
     else
       render json: @info.errors, status: :unprocessable_entity
@@ -52,5 +52,9 @@ class Api::V1::UserInfosController < ApplicationController
 
   def set_info
     @info = UserInfo.find(params[:id])
+  end
+
+  def info_params
+    params.require(:user_info).permit(:profile_id, :access_level, :data => {})
   end
 end

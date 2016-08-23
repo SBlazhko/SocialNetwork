@@ -1,6 +1,7 @@
 class  Api::V1::ProfilesController < ApplicationController
-	
-	before_action
+
+	# before_action :authenticate, except: [:index, :create]
+	before_action :authenticate_user!, only: [:update, :destroy]
 
 	def show 
 		respond_to do |format|
@@ -17,13 +18,13 @@ class  Api::V1::ProfilesController < ApplicationController
 	def create
 		profile = Profile.new(profile_params)
 		profile.save
-		t = Token.new
-		t.profile_id = profile.id
-		t.token = t.add_token(:activate, size: 20)
-		t.save
+		token = Token.new
+		token.profile_id = profile.id
+		# binding.pry
+		token.token = token.generate_unique_secure_token
 		respond_to do |format|
-			if profile.save 
-				format.json {render json: profile.login, status: 201 }
+			if token.save
+				format.json {render json: {profile: profile, token: token }, status: 201 }
 			else 
 				format.json {render json: {errors: profile.errors}, status: 422}
 			end
@@ -51,9 +52,9 @@ class  Api::V1::ProfilesController < ApplicationController
 			end
 		end
 	end
+
 	private
 	def profile_params
 		params.require(:profile).permit(:login, :password)
 	end
-
 end

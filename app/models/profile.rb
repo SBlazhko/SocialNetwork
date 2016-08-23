@@ -8,6 +8,6 @@ class Profile < ApplicationRecord
 	has_many :tokens
 
 	validates :login, uniqueness: true, presence: true
+	validates :password, length: { minimum: 6 }, allow_blank: true
 
-	
 end

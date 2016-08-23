@@ -2,7 +2,7 @@
 
 	skip_before_action :authentificate!
 
-	def create 
+	def login 
 		if profile = Profile.find_by(login: params[:profile][:login]).try(:authenticate, params[:profile][:password])
 			token = Token.new
 			token.token = token.generate_unique_secure_token 
@@ -19,7 +19,7 @@
 		end 
 	end
 
-	def destroy
+	def logout
 		token = Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
 	    token.token = token.generate_unique_secure_token
 	    token.save

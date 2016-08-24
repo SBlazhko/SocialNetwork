@@ -1,6 +1,7 @@
 class Api::V1::AttachmentFileController < ApplicationController
   require 'mime/types'
 
+# see example how to use it  here https://github.com/YuriGitHub/example_use_api/blob/master/src/main/java/ua/thinkMobiles/Main.java
   def upload_file
     plaintext = MIME::Types[request.headers['Content-Type']]
     text = plaintext.first

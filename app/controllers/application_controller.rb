@@ -5,8 +5,8 @@ class ApplicationController < ActionController::API
 
 	def authentificate!
 		if Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
-		else 
-			render json: {error: 'token invalid'}, status: 401 
+		else
+			render json: {error: 'token invalid'}, status: 401
 		end
 	end
 

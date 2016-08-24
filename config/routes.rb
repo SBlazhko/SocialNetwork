@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   		end
   		post "tokens/login", to: "tokens#login"
   		post "tokens/logout", to: "tokens#logout"
+      post "/upload_file", to: 'attachment_file#upload_file'
 	end
   end
 end

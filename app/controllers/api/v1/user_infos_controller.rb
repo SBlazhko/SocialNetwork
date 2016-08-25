@@ -18,10 +18,37 @@ class Api::V1::UserInfosController < ApplicationController
     end
   end
 
-  api :GET, '/user/info/', "Show user infos"
+  api :GET, '/profile/info/', "Show user infos"
   formats ['json']
   param :profile_id, :number, "Profile id of the User"
   param :access_level, ["level_one", "level_two", "level_three"], "Access level of the info"
+  example '{
+  "user_info": [
+    {
+      "id": 12,
+      "data": {
+        "age": "18",
+        "last_name": "shaman",
+        "first_name": "test"
+      },
+      "profile_id": 2,
+      "created_at": "2016-08-24T17:27:35.276Z",
+      "updated_at": "2016-08-24T17:27:35.276Z",
+      "access_level": "level_two"
+    },
+    {
+      "id": 13,
+      "data": {
+        "age": "55",
+        "last_name": "test3",
+        "first_name": "test2"
+      },
+      "profile_id": 2,
+      "created_at": "2016-08-25T06:53:08.217Z",
+      "updated_at": "2016-08-25T06:53:08.217Z",
+      "access_level": "level_two"
+    }
+  ]'
   def show
     info = UserInfo.where(profile_id: params[:profile_id],
                           access_level: params[:access_level])
@@ -32,11 +59,22 @@ class Api::V1::UserInfosController < ApplicationController
     end
   end
 
-  api :POST, '/user/info', "Create an info"
+  api :POST, '/profile/info', "Create an info"
   formats ['json']
   param_group :info_create
   error 422, "Unprocessable Entity"
-  example " {'profile_id': '1', 'access_level': 'level_one', 'data': { 'key': 'value', ... , 'key': 'value'  }} "
+  example '{
+  "id": 19,
+  "data": {
+    "age": "55",
+    "first_name": "test2",
+    "last_name": "test3"
+  },
+  "profile_id": 2,
+  "created_at": "2016-08-25T11:23:05.386Z",
+  "updated_at": "2016-08-25T11:23:05.386Z",
+  "access_level": "level_two"
+}'
   def create
     @info = UserInfo.new(info_params)
     @info.data = params[:data]
@@ -48,11 +86,22 @@ class Api::V1::UserInfosController < ApplicationController
     end
   end
 
-  api :PUT, '/user/info', "Update an info"
+  api :PUT, '/profile/info', "Update an info"
   formats ['json']
   error 422, "Unprocessable Entity"
   param_group :info_update
-  example " {'id': '2', 'access_level': 'level_one', 'data': { 'key': 'value', ... , 'key': 'value'  }} "
+  example '{
+  "access_level": "level_two",
+  "data": {
+    "age": "55",
+    "first_name": "test2",
+    "last_name": "test3"
+  },
+  "id": 5,
+  "profile_id": 2,
+  "created_at": "2016-08-24T17:22:43.140Z",
+  "updated_at": "2016-08-25T13:39:07.730Z"
+}'
   def update
     @info.access_level = params[:access_level]
     @info.data = params[:data]
@@ -63,7 +112,7 @@ class Api::V1::UserInfosController < ApplicationController
     end
   end
 
-  api :DELETE, '/user/info', "Delete an info"
+  api :DELETE, '/profile/info', "Delete an info"
   formats ['json']
   error 422, "Unprocessable Entity"
   param :id, :number,

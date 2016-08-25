@@ -12,10 +12,10 @@ Rails.application.routes.draw do
 
 
       controller :user_infos do
-        get 'user/info/' => :show
-        post 'user/info/' => :create
-        put 'user/info/' => :update
-        delete 'user/info/' => :destroy
+        get 'profile/info/' => :show
+        post 'profile/info/' => :create
+        put 'profile/info/' => :update
+        delete 'profile/info/' => :destroy
       end
     end
   end

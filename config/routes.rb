@@ -5,17 +5,26 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
   	namespace :v1 do
       controller :profiles do
-        get "profiles" => :index
-        post "profiles" => :create
-        get "profile" => :show
-        put "profile" => :update
-        delete "profile" => :destroy
-  		end
+        get "profiles", to: "profiles#index"
+        post "profiles", to: "profiles#create"
+        get "profile", to: "profiles#show"
+        put "profile", to: "profiles#update"
+        delete "profile", to: "profiles#destroy"
+      end
+
+      controller :posts do
+        get "profile/posts", to: 'posts#index'
+        post "profile/posts", to: 'posts#create'
+        get "profile/post", to: 'posts#show'
+        put "profile/post", to: 'posts#update'
+        delete "profile/post", to: 'posts#destroy'
+      end
 
       controller :tokens do
-    		post "login" => :login
-    		post "logout" => :logout
+    		post "login", to: "tokens#login"
+    		post "logout", to: "tokens#logout"
       end
+
     end
 	end
 end

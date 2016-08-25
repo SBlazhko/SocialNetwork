@@ -25,7 +25,7 @@ class  Api::V1::ProfilesController < ApplicationController
 		param :login, String, "Unique profile login", required: true
 		param :password, String, "Profile password, minimum 6 symbols", required: true
 	end
-	example "{'profile' : {'login' : 'test', 'password' : '111111'}}"
+	example "{'id': 1,'login': 'example','token': 'XadLkLyDvfXytrPobJWXPGpa',created_at': '2016-08-25T13:19:26.197Z'}"
 	error code: 422
 	def create
 		profile = Profile.new(profile_params)

@@ -6,7 +6,7 @@
 	param :login, String, "Profile login"
 	param :password, String, "Profile password"
 	error code: 401, desc: "Invalid email or password"
-	example "{'profile' : {'login' : 'test', 'password' : '111111'}}"
+	example "{'token': '4HkaLZUQMKWEEXHgPwUPDE28'}"
 	def login 
 		if profile = Profile.find_by(login: params[:profile][:login]).try(:authenticate, params[:profile][:password])
 			token = Token.new

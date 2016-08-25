@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
 	include ActionController::MimeResponds
-	include ActionView::Layouts
+	# include ActionView::Layouts
 	
 	before_action :authentificate!
 

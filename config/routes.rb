@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
-  ActiveAdmin.routes(self)
+  apipie
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api, defaults: {format: :json} do
   	namespace :v1 do
-  		resources :profiles, only: [:index, :create, :show, :update, :destroy] do
-  			resources :posts
+      controller :profiles do
+        get "profiles" => :index
+        post "profiles" => :create
+        get "profile" => :show
+        put "profile" => :update
+        delete "profile" => :destroy
   		end
-  		post "tokens/login", to: "tokens#login"
-  		post "tokens/logout", to: "tokens#logout"
+
+      controller :tokens do
+    		post "login" => :login
+    		post "logout" => :logout
+      end
+    end
 	end
-  end
 end

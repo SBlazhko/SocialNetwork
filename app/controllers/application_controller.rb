@@ -1,8 +1,7 @@
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
 	include ActionController::MimeResponds
-	# include ActionView::Layouts
 	
-	before_action :authentificate!
+	before_action :authenticate!
 
 	def authentificate!
 		if Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])

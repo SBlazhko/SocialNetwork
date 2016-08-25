@@ -1,6 +1,6 @@
 class  Api::V1::ProfilesController < ApplicationController
 
-	skip_before_action :authentificate!, only: [:create]
+	skip_before_action :authenticate!, only: [:create]
 
 	api :GET, 'profile', "Show profile data"
 	param :id, :number, "Profile id", required: true

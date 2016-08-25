@@ -1,6 +1,6 @@
 	class Api::V1::TokensController < ApplicationController
 
-	skip_before_action :authentificate!
+	skip_before_action :authenticate!
 
 	api :POST, 'login', "Generate new user token"
 	param :login, String, "Profile login"

@@ -15,12 +15,12 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 gem 'apipie-rails'
-# gem 'devise'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 # gem 'activeadmin', github: 'activeadmin'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
+# gem 'devise'
 # gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 # gem 'activeadmin', github: 'activeadmin'
 

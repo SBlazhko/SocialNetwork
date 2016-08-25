@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 	
 	before_action :authenticate!
 
-	def authentificate!
+	def authenticate!
 		if Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
 		else 
 			render json: {error: 'token invalid'}, status: 401 

@@ -25,7 +25,7 @@ class  Api::V1::PostsController < ApplicationController
 	end
 
 	api :POST, 'profile/post', "Create new post"
-	param :access_level, String, "enum - level_one/level_two/level_three", required: true
+	param :access_level, ["level_one", "level_two", "level_three"], "Access level of the post", required: true
 	param :text, String, "Post message", required: true
 	example "Request - {'access_level' : 'level_three', 'text':'test text'}"
 	example "Response - {'id': 8,
@@ -62,6 +62,7 @@ class  Api::V1::PostsController < ApplicationController
 
 	api :PUT, 'profile/post', "Update post"
 	param :id, :number, "Post id (query param)"
+	param :access_level, ["level_one", "level_two", "level_three"], "Access level of the post"
 	example "Request - {'access_level' : 'level_two', 'text':'Update text'}"
 
 	def update

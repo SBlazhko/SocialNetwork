@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-	include ActionController::MimeResponds
+
+  include ActionController::MimeResponds
 	
 	before_action :authenticate!
 

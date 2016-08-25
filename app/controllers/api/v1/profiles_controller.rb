@@ -43,10 +43,12 @@ class  Api::V1::ProfilesController < ApplicationController
 		param :password, String, "Profile password, minimum 6 symbols", required: true
 	end
 	example "Request - {'profile' : {'login':'test', 'password':'111111'}}"
-	example "Response - {'id': 1,
+	example "Response - {'profile' : {
+	'id': 1,
 	'login': 'example',
 	'token': 'XadLkLyDvfXytrPobJWXPGpa',
-	created_at': '2016-08-25T13:19:26.197Z'}"
+	created_at': '2016-08-25T13:19:26.197Z'},
+	'token': 'k4dtM3HdZCyUznYUV2ioHbuj'}"
 
 	def create
 		profile = Profile.new(profile_params)
@@ -56,7 +58,7 @@ class  Api::V1::ProfilesController < ApplicationController
 		token.token = token.generate_unique_secure_token
 		respond_to do |format|
 			if token.save
-				format.json {render json: profile.profile_show_params, status: 201 }
+				format.json {render json: {profile: profile.profile_show_params, token: token.token}, status: 201 }
 			else 
 				format.json {render json: {errors: profile.errors}, status: 422}
 			end

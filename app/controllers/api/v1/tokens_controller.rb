@@ -21,7 +21,7 @@
 			end
 		end
 		else
-			render json: { errors: "Invalid email or password" }, status: 401 }
+			render json: { errors: "Invalid email or password" }, status: 401 
 		end 
 	end
 
@@ -33,7 +33,7 @@
 	    if token.destroy
 	    	render json: {}, status: 204
 	    else
-	    	render json: {error: "Token not found"}, status: 422 }
+	    	render json: {error: "Token not found"}, status: 422 
 	    end
 	end
 end

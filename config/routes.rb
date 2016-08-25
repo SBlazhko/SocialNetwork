@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   apipie
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   namespace :api, defaults: {format: :json} do
   	namespace :v1 do
      
@@ -17,6 +17,12 @@ Rails.application.routes.draw do
     		post "logout", to: "tokens#logout"
       end
 
+      controller :user_infos do
+        get 'profile/info/' => :show
+        post 'profile/info/' => :create
+        put 'profile/info/' => :update
+        delete 'profile/info/' => :destroy
+      end
     end
 	end
 end

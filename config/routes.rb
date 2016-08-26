@@ -23,6 +23,12 @@ Rails.application.routes.draw do
         put 'profile/info/' => :update
         delete 'profile/info/' => :destroy
       end
+
+      controller :messages do
+        get 'profile/messages/' => :index
+        post 'profile/message/' => :create
+        delete 'profile/message/' => :destroy
+      end
     end
 	end
 end

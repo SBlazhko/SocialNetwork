@@ -30,7 +30,7 @@ class Api::V1::AttachmentFileController < ApplicationController
     # tmp_file.close
   end
 
-  api :DELETE, '/destroy_file', 'Delete single file'
+  api :DELETE, 'destroy_file', 'Delete single file'
   formats ['application/json']
   error code: 400, desc:"cant destroy file"
   error code: 404, desc: 'not found'
@@ -50,7 +50,7 @@ class Api::V1::AttachmentFileController < ApplicationController
     end
   end
 
-  api :GET, '/get_files_list', 'Get list of files'
+  api :GET, 'get_files_list', 'Get list of files'
   formats ['application/json']
   error code: 404, desc: 'not found'
   param :profile_id, :number, require: false, desc: 'if profile id isnt present you will get current users files'
@@ -93,7 +93,7 @@ class Api::V1::AttachmentFileController < ApplicationController
 
 
 
-  api :GET, '/get_file', 'Get file by id'
+  api :GET, 'get_file', 'Get file by id'
   formats ['application/json']
   param :file_id, :number, required: true, desc: 'get file by id'
   error code: 404, desc: 'not found'

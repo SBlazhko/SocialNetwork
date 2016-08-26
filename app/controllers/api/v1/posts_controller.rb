@@ -76,7 +76,7 @@ class  Api::V1::PostsController < ApplicationController
 		end
 	end
 
-	api :PUT, 'profile/post', "Delete post"
+	api :DELETE, 'profile/post', "Delete post"
 	param :id, :number, "Post id (query param)"
 
 	def destroy

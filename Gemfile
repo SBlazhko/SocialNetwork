@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'pg'
+# gem 'pg'
 # API Documentation Tool
 gem 'apipie-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -19,6 +19,15 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'apipie-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+gem 'paperclip'
+gem 'jwt'
+gem 'simple_command'
+gem 'apipie-rails'
+# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
+# gem 'rack-cors'
+gem 'mime-types'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 # gem 'devise'
@@ -28,10 +37,12 @@ gem 'apipie-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano-passenger'
 
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'pry-rails'
+  gem 'pry-nav'
 end
 
 group :development do

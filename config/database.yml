@@ -38,8 +38,8 @@ production:
   pool: 5
   # these are our new parameters
   encoding: unicode
-  database: social_p
+  database: social_network_api_production
   host: localhost
-  username: sblazhko
-  password: 2525
+  username: thinkmobiles
+  password: 
 

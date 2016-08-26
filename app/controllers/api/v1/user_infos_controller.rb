@@ -22,7 +22,7 @@ class Api::V1::UserInfosController < ApplicationController
   formats ['json']
   param :profile_id, :number, "Profile id of the User"
   param :access_level, ["level_one", "level_two", "level_three"], "Access level of the info"
-  example '{
+  example 'Response - {
   "user_info": [
     {
       "id": 12,
@@ -63,14 +63,16 @@ class Api::V1::UserInfosController < ApplicationController
   formats ['json']
   param_group :info_create
   error 422, "Unprocessable Entity"
-  example '{
+  example '
+  Request - {"profile_id": "18", "access_level": "level_two", "data": {"age": "55", ... , "last_name": "Kaniuk"}
+  Response - {
   "id": 19,
   "data": {
     "age": "55",
-    "first_name": "test2",
-    "last_name": "test3"
+    ... ,
+    "last_name": "Kaniuk"
   },
-  "profile_id": 2,
+  "profile_id": "18",
   "created_at": "2016-08-25T11:23:05.386Z",
   "updated_at": "2016-08-25T11:23:05.386Z",
   "access_level": "level_two"
@@ -90,16 +92,18 @@ class Api::V1::UserInfosController < ApplicationController
   formats ['json']
   error 422, "Unprocessable Entity"
   param_group :info_update
-  example '{
-  "access_level": "level_two",
+  example '
+  Request - {"id": "19", "access_level": "level_one", "data": {"age": "55", ... , "last_name": "Kaniuk"}
+  Response - {
+  "access_level": "level_one",
   "data": {
     "age": "55",
-    "first_name": "test2",
-    "last_name": "test3"
+    ... ,
+    "last_name": "Kaniuk"
   },
-  "id": 5,
-  "profile_id": 2,
-  "created_at": "2016-08-24T17:22:43.140Z",
+  "id": 19,
+  "profile_id": 18,
+  "created_at": "2016-08-25T11:23:05.386Z",
   "updated_at": "2016-08-25T13:39:07.730Z"
 }'
   def update

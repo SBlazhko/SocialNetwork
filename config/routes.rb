@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
+  
   apipie
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
   namespace :api, defaults: {format: :json} do
-    namespace :v1 do
-
-      resources :profiles, only: [:index, :create, :show, :update, :destroy] do
-        resources :posts
+  	namespace :v1 do
+     
+      resource :profile, except: [:new, :edit] do
+        resource :post, except: [:new, :edit]
       end
-      post "tokens/login", to: "tokens#login"
-      post "tokens/logout", to: "tokens#logout"
 
+      get 'profiles', to: "profiles#index"
+      get 'profile/posts', to: "posts#index"
+
+      controller :tokens do
+    		post "login", to: "tokens#login"
+    		post "logout", to: "tokens#logout"
+      end
 
       controller :user_infos do
         get 'profile/info/' => :show
@@ -18,5 +24,5 @@ Rails.application.routes.draw do
         delete 'profile/info/' => :destroy
       end
     end
-  end
+	end
 end

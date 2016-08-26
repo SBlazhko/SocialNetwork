@@ -1,11 +1,10 @@
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
 
   include ActionController::MimeResponds
-	include ActionController::MimeResponds
+	
+	before_action :authenticate!
 
-	before_action :authentificate!
-
-	def authentificate!
+	def authenticate!
 		if Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
 		else 
 			render json: {error: 'token invalid'}, status: 401 

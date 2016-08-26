@@ -38,7 +38,7 @@ production:
   pool: 5
   # these are our new parameters
   encoding: unicode
-  database: social_d
+  database: social_p
   host: localhost
   username: sblazhko
   password: 2525

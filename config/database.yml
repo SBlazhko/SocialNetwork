@@ -39,4 +39,4 @@ production:
   database: social_network_api_production
   host: localhost
   username: thinkmobiles
-  password: 1111
+  password: null

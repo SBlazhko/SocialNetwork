@@ -2,7 +2,7 @@ server '192.168.88.241', roles: [:web, :app, :db], primary: true
 lock '3.6.1'
 set :application, 'SocialNetwork'
 set :repo_url, 'git@github.com:SBlazhko/SocialNetwork.git'
-set :branch, 'pre_development'
+set :branch, 'master'
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -25,7 +25,7 @@ set :rbenv_ruby, '2.2.3'
 #############
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('config/database.yml')
+# set :linked_files, fetch(:linked_files, []).push('config/database.yml')
 #  set :ssh_options, {
 #    keys: %w(/home/rlisowski/.ssh/id_rsa),
 #    forward_agent: false,

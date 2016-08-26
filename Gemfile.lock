@@ -46,12 +46,6 @@ GEM
     bcrypt (3.1.11)
     builder (3.2.2)
     byebug (9.0.5)
-<<<<<<< HEAD
-    climate_control (0.0.3)
-      activesupport (>= 3.0)
-    cocaine (0.5.8)
-      climate_control (>= 0.0.3, < 1.0)
-=======
     capistrano (3.6.1)
       airbrussh (>= 1.0.0)
       capistrano-harrow
@@ -70,7 +64,10 @@ GEM
     capistrano-rbenv (2.0.4)
       capistrano (~> 3.1)
       sshkit (~> 1.3)
->>>>>>> 9b25f81186b5b173b490a345d2478499dfee3b10
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.8)
+      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.1)
     concurrent-ruby (1.0.2)
     erubis (2.7.0)
@@ -82,6 +79,7 @@ GEM
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     json (2.0.2)
+    jwt (1.5.4)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -104,16 +102,13 @@ GEM
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
       pkg-config (~> 1.1.7)
-<<<<<<< HEAD
-    paperclip (5.0.0)
+    paperclip (5.1.0)
       activemodel (>= 4.2.0)
       activesupport (>= 4.2.0)
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (~> 0.3.0)
-=======
     pg (0.18.4)
->>>>>>> 9b25f81186b5b173b490a345d2478499dfee3b10
     pkg-config (1.1.7)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -154,6 +149,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    simple_command (0.0.9)
     slop (3.6.0)
     spring (1.7.2)
     spring-watcher-listen (2.0.0)
@@ -188,17 +184,16 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rbenv
   jbuilder (~> 2.5)
+  jwt
   listen (~> 3.0.5)
-<<<<<<< HEAD
   mime-types
   paperclip
-  pry-nav
-=======
   pg
->>>>>>> 9b25f81186b5b173b490a345d2478499dfee3b10
+  pry-nav
   pry-rails
   puma (~> 3.0)
   rails (~> 5.0.0, >= 5.0.0.1)
+  simple_command
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data

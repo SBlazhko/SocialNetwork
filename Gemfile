@@ -23,6 +23,7 @@ gem 'apipie-rails'
 gem 'paperclip'
 gem 'jwt'
 gem 'simple_command'
+gem 'apipie-rails'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 gem 'mime-types'

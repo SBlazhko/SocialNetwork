@@ -11,10 +11,14 @@ default: &default
   timeout: 5000
 
 development:
-  <<: *default
-  login: sblazhko
-  password: 2525
+  adapter: postgresql
+  pool: 5
+  # these are our new parameters
+  encoding: unicode
   database: social_d
+  host: localhost
+  username: sblazhko
+  password: 2525
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -31,4 +35,3 @@ production:
   database: social_p
   login: sblazhko
   password: 2525
-

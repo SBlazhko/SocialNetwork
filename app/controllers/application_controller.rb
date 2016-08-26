@@ -15,4 +15,5 @@ class ApplicationController < ActionController::Base
 		token = Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
 		token.profile if token
 	end
+
 end

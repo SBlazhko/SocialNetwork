@@ -15,6 +15,7 @@ development:
   login: sblazhko
   password: 2525
   database: social_d
+  
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,10 +25,11 @@ test:
   database: social_t
   login: sblazhko
   password: 2525
+  
 
 production:
   <<: *default
   database: social_p
   login: sblazhko
   password: 2525
-
+  

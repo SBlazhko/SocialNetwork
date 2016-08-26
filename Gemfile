@@ -16,14 +16,10 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-gem 'apipie-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 gem 'paperclip'
-gem 'jwt'
-gem 'simple_command'
-gem 'apipie-rails'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 gem 'mime-types'
@@ -33,10 +29,11 @@ gem 'mime-types'
 # gem 'devise'
 # gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 # gem 'activeadmin', github: 'activeadmin'
-  gem 'capistrano-rails'
-  gem 'capistrano-rbenv'
-  gem 'capistrano-passenger'
-
+gem 'capistrano-rails'
+gem 'capistrano-rbenv'
+gem 'capistrano-passenger'
+gem 'rails_12factor'
+gem 'passenger'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

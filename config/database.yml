@@ -18,7 +18,6 @@ development:
   database: social_d
   host: localhost
   username: sblazhko
-  password: 2525
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -31,15 +30,13 @@ test:
   database: social_d
   host: localhost
   username: sblazhko
-  password: 2525
 
 production:
   adapter: postgresql
+  host: ec2-23-21-71-9.compute-1.amazonaws.com
   pool: 5
   # these are our new parameters
   encoding: unicode
-  database: social_p
-  host: localhost
-  username: sblazhko
-  password: 2525
-
+  database: d51b1mr6ek31d5
+  username: kcwjnxwyujdwzw
+  password: grv-0HSMRbPENvSoH3JJ2uzi7O

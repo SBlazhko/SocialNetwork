@@ -24,10 +24,14 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: social_t
-  login: sblazhko
-  password: 2525
+    adapter: postgresql
+    pool: 5
+    # these are our new parameters
+    encoding: unicode
+    database: social_d
+    host: localhost
+    username: sblazhko
+    password: 2525
 
 production:
   <<: *default

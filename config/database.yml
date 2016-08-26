@@ -39,4 +39,4 @@ production:
   database: social_network_api_production
   host: localhost
   username: thinkmobiles
-  password: {Capistrano::CLI.ui.ask("Enter MySQL database password")}
+  password: #{Capistrano::CLI.ui.ask("Enter MySQL database password")}

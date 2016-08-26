@@ -1,10 +1,13 @@
 source 'https://rubygems.org'
 
-
+gem 'pg'
+# API Documentation Tool
+gem 'apipie-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -13,14 +16,28 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
+gem 'apipie-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+<<<<<<< HEAD
 gem 'paperclip'
 gem 'jwt'
 gem 'simple_command'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 gem 'mime-types'
+=======
+# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
+# gem 'rack-cors'
+# gem 'devise'
+# gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+# gem 'activeadmin', github: 'activeadmin'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-passenger'
+  
+
+>>>>>>> 9b25f81186b5b173b490a345d2478499dfee3b10
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

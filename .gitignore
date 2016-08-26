@@ -16,11 +16,15 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+/.idea/*
 
 public
 db/schema.rb
 Gemfile.lock
 
+/.idea/*
+
 # Ignore Byebug command history file.
+.byebug_history
 .byebug_history
 

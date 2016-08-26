@@ -29,10 +29,10 @@ gem 'mime-types'
 # gem 'devise'
 # gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 # gem 'activeadmin', github: 'activeadmin'
-  gem 'capistrano-rails'
-  gem 'capistrano-rbenv'
-  gem 'capistrano-passenger'
-
+gem 'capistrano-rails'
+gem 'capistrano-rbenv'
+gem 'capistrano-passenger'
+gem 'rails_12factor'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

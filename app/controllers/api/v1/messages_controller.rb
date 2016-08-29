@@ -39,7 +39,7 @@ class Api::V1::MessagesController < ApplicationController
                               current_user.id,
                               params[:receiver_id],
                               current_user.id,
-                              params[:receiver_id]).order("created_at").page(params[:page]).per(3)
+                              params[:receiver_id]).order("created_at").page(params[:page]).per(10)
     if @messages.empty?
       head :no_content
     else

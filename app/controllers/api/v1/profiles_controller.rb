@@ -48,7 +48,7 @@ class  Api::V1::ProfilesController < ApplicationController
 	    'created_at': '2016-08-25T14:27:12.923Z'}]"
 
 	def index 
-		profiles = Profile.all.page(params[:page]).per(5)
+		profiles = Profile.all.page(params[:page]).per(10)
 		respond_to do |format|
 			format.json {render json: {pages: {total: profiles.total_pages, current: profiles.current_page}, 
 															profiles: profiles.map(&:profile_show_params)}}

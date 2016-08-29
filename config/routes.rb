@@ -30,17 +30,16 @@ Rails.application.routes.draw do
         delete 'profile/info/' => :destroy
       end
 
-<<<<<<< HEAD
       controller :messages do
         get 'profile/messages/' => :index
         post 'profile/message/' => :create
         delete 'profile/message/' => :destroy
       end
-=======
+
       get '/get_files_list/', to: 'attachment_file#get_files_list'
       delete '/destroy_file', to: 'attachment_file#destroy_file'
       get '/get_file', to: 'attachment_file#get_file'
->>>>>>> pre_development
+
     end
 	end
 end

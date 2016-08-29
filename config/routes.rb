@@ -7,8 +7,6 @@ Rails.application.routes.draw do
   		# resources :profiles, only: [:index, :create, :show, :update, :destroy] do
   		# 	resources :posts
   		# end
-  		post "tokens/login", to: "tokens#login"
-  		post "tokens/logout", to: "tokens#logout"
       post "/upload_file", to: 'attachment_file#upload_file'
 
 
@@ -18,6 +16,7 @@ Rails.application.routes.draw do
 
       get 'profiles', to: "profiles#index"
       get 'profile/posts', to: "posts#index"
+      get 'my_profile', to: "profiles#my_profile"
 
       controller :tokens do
     		post "login", to: "tokens#login"
@@ -30,11 +29,10 @@ Rails.application.routes.draw do
         put 'profile/info/' => :update
         delete 'profile/info/' => :destroy
       end
+
       get '/get_files_list/', to: 'attachment_file#get_files_list'
       delete '/destroy_file', to: 'attachment_file#destroy_file'
       get '/get_file', to: 'attachment_file#get_file'
     end
-
-
 	end
 end

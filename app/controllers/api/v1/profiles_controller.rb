@@ -2,7 +2,7 @@ class  Api::V1::ProfilesController < ApplicationController
 
 	skip_before_action :authenticate!, only: [:create]
 
-	api :GET, 'profile', "Show profile data"
+	api :GET, 'profile', "Show profile data by id"
 	param :id, :number, "Profile id (query param)", required: true
 	example "Response - {'id': 1,
 	    'login': 'example',
@@ -13,6 +13,16 @@ class  Api::V1::ProfilesController < ApplicationController
 			format.json {render json: Profile.find(params[:id]).profile_show_params, status: 200 }
 		end
 	end
+
+	api :GET, 'my_profile', "Show current_user profile"
+	example "Response - 'id': 1,
+	    'login': 'example',
+	    'created_at': '2016-08-25T14:13:36.622Z'}"
+	def my_profile 
+	 	respond_to do |format|
+	 		format.json {render json: Profile.find(current_user.id).profile_show_params, status: 200}
+	 	end
+	end 
 
 	api :GET, 'profiles', "Show all profiles"
 	example "Response - [
@@ -33,7 +43,7 @@ class  Api::V1::ProfilesController < ApplicationController
 
 	def index 
 		respond_to do |format|
-			format.json {render json: Profile.all.map(&:profile_show_params)}
+			format.json {render json: Profile.all.map(&:profile_show_params).page(params[:page]).per(5)}
 		end
 	end
 

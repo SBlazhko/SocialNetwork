@@ -79,6 +79,9 @@ GEM
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
     json (2.0.2)
+    kaminari (0.17.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
@@ -190,6 +193,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rbenv
   jbuilder (~> 2.5)
+  kaminari
   listen (~> 3.0.5)
   mime-types
   paperclip

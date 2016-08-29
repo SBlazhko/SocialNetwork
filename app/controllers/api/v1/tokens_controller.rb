@@ -6,8 +6,8 @@
 	param :login, String, "Profile login"
 	param :password, String, "Profile password"
 	error code: 401, desc: "Invalid email or password"
-	example "Request - {'login':'examplee','password':'111111'}"
-	example "Response - {'token': '4HkaLZUQMKWEEXHgPwUPDE28'}"
+	example 'Request - {"login":"examplee","password":"111111"}'
+	example 'Response - {"token": "4HkaLZUQMKWEEXHgPwUPDE28"}'
 	def login 
 		if profile = Profile.find_by(login: params[:login]).try(:authenticate, params[:password])
 			token = Token.new
@@ -21,7 +21,7 @@
 			end
 		end
 		else
-			render json: { errors: "Invalid login or password" }, status: 401 
+			render json: { errors: {invalid: "Invalid login or password"} }, status: 401 
 		end 
 	end
 
@@ -33,7 +33,7 @@
 	    if token.destroy
 	    	render json: {}, status: 204
 	    else
-	    	render json: {error: "Token not found"}, status: 422 
+	    	render json: {errors: {not_found: "Token not found"}}, status: 422 
 	    end
 	end
 end

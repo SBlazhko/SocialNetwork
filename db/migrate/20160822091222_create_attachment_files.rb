@@ -6,7 +6,6 @@ class CreateAttachmentFiles < ActiveRecord::Migration[5.0]
       t.string :file_name
       t.string :file_url
       t.integer :profile_id
-
       t.timestamps
     end
   end

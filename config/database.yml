@@ -31,3 +31,14 @@ production:
   database: social_p
   username: shaman
   password: shaman12353
+
+production:
+  adapter: postgresql
+  host: ec2-23-21-71-9.compute-1.amazonaws.com
+  pool: 5
+  # these are our new parameters
+  encoding: unicode
+  database: d51b1mr6ek31d5
+  username: kcwjnxwyujdwzw
+  password: grv-0HSMRbPENvSoH3JJ2uzi7O
+

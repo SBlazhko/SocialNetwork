@@ -16,4 +16,7 @@ class ApplicationController < ActionController::Base
 		token.profile if token
 	end
 
+	def exists_receiver?
+		Profile.exists?(params[:receiver_id])
+	end
 end

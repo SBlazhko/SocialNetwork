@@ -1,7 +1,6 @@
 class  Api::V1::PostsController < ApplicationController
 
 	api :GET, 'profile/posts', "Show all posts current_profile"
-	param :id, :number, "Profile id (query param)", required: true
 	param :page, :number, "Page number (query param)"
 	example "Response - {'pages': { 'total': 2, 'current': 2},
 	  'posts': [

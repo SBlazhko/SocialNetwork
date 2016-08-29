@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
 		token = Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
 		token.profile if token
 	end
+
+	def exists_receiver?
+		Profile.exists?(params[:receiver_id])
+	end
 end

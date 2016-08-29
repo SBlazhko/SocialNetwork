@@ -2,7 +2,9 @@ class  Api::V1::PostsController < ApplicationController
 
 	api :GET, 'profile/posts', "Show all posts current_profile"
 	param :id, :number, "Profile id (query param)", required: true
-	example "[
+	param :page, :number, "Page number (query param)"
+	example "Response - {'pages': { 'total': 2, 'current': 2},
+	  'posts': [
 	  {
 	    'id': 6,
 	    'profile_id': 5,
@@ -18,9 +20,10 @@ class  Api::V1::PostsController < ApplicationController
 	    'created_at': '2016-08-25T21:47:20.413Z'} ]"
 
 	def index 
-		posts = current_user.posts
+		posts = current_user.posts.page(params[:page]).per(5)
 		respond_to do |format|
-			format.json {render json: posts.map(&:post_show_params), status: 200}
+			format.json {render json: {pages: {total: posts.total_pages, current: posts.current_page}, 
+												posts: posts.map(&:post_show_params)}, status: 200}
 		end
 	end
 

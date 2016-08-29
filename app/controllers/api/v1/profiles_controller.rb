@@ -1,5 +1,7 @@
 class  Api::V1::ProfilesController < ApplicationController
 
+	# include Api::V1::ProfilesDoc
+
 	skip_before_action :authenticate!, only: [:create]
 
 	api :GET, 'profile', "Show profile data by id"
@@ -25,7 +27,11 @@ class  Api::V1::ProfilesController < ApplicationController
 	end 
 
 	api :GET, 'profiles', "Show all profiles"
-	example "Response - [
+	param :page, :number, "Page number (query param)"
+	example "Response - {'pages': {
+		'total': 3,
+		'current': 1}, 
+	'profiles' : [
 	  {
 	    'id': 1,
 	    'login': 'example',
@@ -42,8 +48,10 @@ class  Api::V1::ProfilesController < ApplicationController
 	    'created_at': '2016-08-25T14:27:12.923Z'}]"
 
 	def index 
+		profiles = Profile.all.page(params[:page]).per(5)
 		respond_to do |format|
-			format.json {render json: Profile.all.map(&:profile_show_params).page(params[:page]).per(5)}
+			format.json {render json: {pages: {total: profiles.total_pages, current: profiles.current_page}, 
+															profiles: profiles.map(&:profile_show_params)}}
 		end
 	end
 

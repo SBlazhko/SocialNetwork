@@ -1,7 +1,7 @@
 # User Info
 class Api::V1::UserInfosController < ApplicationController
 
-  api :GET, '/profile/info/', "Show user infos"
+  api :GET, 'profile/info/', "Show user infos"
   formats ['json']
   param :profile_id, :number, "Profile id of the User", required: true
   param :access_level, ["level_one", "level_two", "level_three"], "Access level of the info"
@@ -50,7 +50,7 @@ class Api::V1::UserInfosController < ApplicationController
     end
   end
 
-  api :POST, '/profile/info', "Create an info"
+  api :POST, 'profile/info', "Create an info"
   formats ['json']
   param :user_infos, Array, "Array of hashes"
   param :access_level, ["level_one", "level_two", "level_three"], "Access level of the info"
@@ -110,7 +110,7 @@ class Api::V1::UserInfosController < ApplicationController
     render json: { user_infos: result }, status: :created
   end
 
-  api :PUT, '/profile/info', "Update an info"
+  api :PUT, 'profile/info', "Update an info"
   formats ['json']
   error 422, "Unprocessable Entity"
   param :user_infos, Array, "Array of hashes"
@@ -160,7 +160,7 @@ class Api::V1::UserInfosController < ApplicationController
     render json: { user_infos: result }, status: :ok
   end
 
-  api :DELETE, '/profile/info', "Delete an info"
+  api :DELETE, 'profile/info', "Delete an info"
   formats ['json']
   error 422, "Unprocessable Entity"
   param :id, :number, required: true

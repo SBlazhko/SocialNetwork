@@ -1,46 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
   <component name="DataSourceManagerImpl" format="xml" hash="918020674">
     <data-source source="LOCAL" name="PostgreSQL - social_d@localhost" uuid="e6bb36b8-d07a-42e5-a362-856b96681e3e">
+=======
+  <component name="DataSourceManagerImpl" format="xml" hash="2967216294">
+    <data-source source="LOCAL" name="PostgreSQL - social_d@localhost" uuid="176f2621-8a21-465f-89c9-7e5447d7b6ab">
+>>>>>>> pre_development
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/social_d</jdbc-url>
-    </data-source>
-    <data-source source="LOCAL" name="Rails SocialNetwork: test" uuid="729ae57b-5ffb-46c4-87cd-6fe98dd3ba46">
-      <driver-ref>239001e1-e114-4702-bf84-531908864dd6</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql:social_d</jdbc-url>
-      <libraries>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/xerial-sqlite-license.txt</url>
-        </library>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/sqlite-jdbc-3.8.11.2.jar</url>
-        </library>
-      </libraries>
-    </data-source>
-    <data-source source="LOCAL" name="Rails SocialNetwork: development" uuid="ccfe9135-37a0-498c-a212-25a0b36117fc">
-      <driver-ref>239001e1-e114-4702-bf84-531908864dd6</driver-ref>
-      <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/config/database.yml</remarks>
-      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql:social_d</jdbc-url>
-      <explain-plan-config>
-        <provider>com.intellij.database.plan.ExplainPlanProvider.NullExplainPlanProvider</provider>
-      </explain-plan-config>
-      <libraries>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/xerial-sqlite-license.txt</url>
-        </library>
-        <library>
-          <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/sqlite-jdbc-3.8.11.2.jar</url>
-        </library>
-      </libraries>
     </data-source>
   </component>
 </project>

@@ -11,23 +11,34 @@ default: &default
   timeout: 5000
 
 development:
-  <<: *default
+  adapter: postgresql
+  pool: 5
+  # these are our new parameters
+  encoding: unicode
   database: social_d
-  username: shaman
-  password: shaman12353
+  host: localhost
+  username: sblazhko
+  password: 2525
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
+  adapter: postgresql
+  pool: 5
+  # these are our new parameters
+  encoding: unicode
   database: social_d
-  username: shaman
-  password: shaman12353
-
+  host: localhost
+  username: sblazhko
+  password: 2525
 
 production:
-  <<: *default
-  database: social_p
-  username: shaman
-  password: shaman12353
+  adapter: postgresql
+  host: ec2-23-21-71-9.compute-1.amazonaws.com
+  pool: 5
+  # these are our new parameters
+  encoding: unicode
+  database: d51b1mr6ek31d5
+  username: kcwjnxwyujdwzw
+  password: grv-0HSMRbPENvSoH3JJ2uzi7O

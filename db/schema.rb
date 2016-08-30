@@ -10,19 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823130644) do
+ActiveRecord::Schema.define(version: 20160829185450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "attachment_files", force: :cascade do |t|
     t.integer  "access_level"
-    t.string   "file_type"
-    t.string   "file_name"
-    t.string   "file_url"
     t.integer  "profile_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -56,12 +55,15 @@ ActiveRecord::Schema.define(version: 20160823130644) do
   end
 
   create_table "user_infos", force: :cascade do |t|
-    t.jsonb    "data"
     t.integer  "profile_id"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "access_level"
+    t.string   "key"
+    t.string   "value"
     t.index ["access_level"], name: "index_user_infos_on_access_level", using: :btree
+    t.index ["key"], name: "index_user_infos_on_key", using: :btree
+    t.index ["value"], name: "index_user_infos_on_value", using: :btree
   end
 
 end

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
 
       controller :user_infos do
-        get 'profile/info/' => :show
+        get 'profile/info/' => :index
         post 'profile/info/' => :create
         put 'profile/info/' => :update
         delete 'profile/info/' => :destroy

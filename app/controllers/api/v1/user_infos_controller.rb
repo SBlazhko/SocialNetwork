@@ -1,57 +1,48 @@
 # User Info
 class Api::V1::UserInfosController < ApplicationController
-  before_action :set_info, only: [:update, :destroy]
-
-  def_param_group :info_create do
-    param :info, Hash do
-      param :profile_id, :number, "Profile id of the User"
-      param :access_level, ["level_one", "level_two", "level_three"], "Access level of the info"
-      param :data, Hash, "Hash from info fields"
-    end
-  end
-
-  def_param_group :info_update do
-    param :info, Hash do
-      param :id, :number, "The id info"
-      param :access_level, ["level_one", "level_two", "level_three"], "Access level of the info"
-      param :data, Hash, "Hash from info fields"
-    end
-  end
 
   api :GET, '/profile/info/', "Show user infos"
   formats ['json']
-  param :profile_id, :number, "Profile id of the User"
+  param :profile_id, :number, "Profile id of the User", required: true
   param :access_level, ["level_one", "level_two", "level_three"], "Access level of the info"
   example 'Response - {
-  "user_info": [
-    {
-      "id": 12,
-      "data": {
-        "age": "18",
-        "last_name": "shaman",
-        "first_name": "test"
-      },
-      "profile_id": 2,
-      "created_at": "2016-08-24T17:27:35.276Z",
-      "updated_at": "2016-08-24T17:27:35.276Z",
-      "access_level": "level_two"
-    },
-    {
-      "id": 13,
-      "data": {
-        "age": "55",
-        "last_name": "test3",
-        "first_name": "test2"
-      },
-      "profile_id": 2,
-      "created_at": "2016-08-25T06:53:08.217Z",
-      "updated_at": "2016-08-25T06:53:08.217Z",
-      "access_level": "level_two"
-    }
-  ]'
-  def show
-    info = UserInfo.where(profile_id: params[:profile_id],
-                          access_level: params[:access_level])
+    "user_info": [
+        {
+            "id": 36,
+            "profile_id": 4,
+            "created_at": "2016-08-29T19:37:30.488Z",
+            "updated_at": "2016-08-30T06:10:48.441Z",
+            "access_level": "level_three",
+            "key": "first_name",
+            "value": "shaman"
+        },
+        {
+            "id": 40,
+            "profile_id": 4,
+            "created_at": "2016-08-29T19:39:07.061Z",
+            "updated_at": "2016-08-30T06:18:33.255Z",
+            "access_level": "level_three",
+            "key": "last_neme",
+            "value": "test"
+        },
+        {
+            "id": 39,
+            "profile_id": 4,
+            "created_at": "2016-08-29T19:39:07.048Z",
+            "updated_at": "2016-08-30T06:21:41.083Z",
+            "access_level": "level_three",
+            "key": "first_name",
+            "value": "test1"
+        }
+    ]
+}'
+  def index
+    if params[:access_level]
+      info = UserInfo.where(profile_id: params[:profile_id],
+                            access_level: params[:access_level])
+    else
+      info = UserInfo.where(profile_id: params[:profile_id])
+    end
     if info.empty?
       head :no_content
     else
@@ -61,80 +52,125 @@ class Api::V1::UserInfosController < ApplicationController
 
   api :POST, '/profile/info', "Create an info"
   formats ['json']
-  param_group :info_create
+  param :user_infos, Array, "Array of hashes"
+  param :access_level, ["level_one", "level_two", "level_three"], "Access level of the info"
+  param :key, String
+  param :value, String
   error 422, "Unprocessable Entity"
   example '
-  Request - {"profile_id": "18", "access_level": "level_two", "data": {"age": "55", ... , "last_name": "Kaniuk"}
+  Request - {"user_infos": [
+{"key": "age", "value": "18", "access_level": "level_two"},
+{"key": "first_name", "value": "Myron", "access_level": "level_two"},
+{"key": "last_name", "value": "Kaniuk", "access_level": "level_one"}
+]}
   Response - {
-  "id": 19,
-  "data": {
-    "age": "55",
-    ... ,
-    "last_name": "Kaniuk"
-  },
-  "profile_id": "18",
-  "created_at": "2016-08-25T11:23:05.386Z",
-  "updated_at": "2016-08-25T11:23:05.386Z",
-  "access_level": "level_two"
+    "user_infos": [
+        {
+            "id": 45,
+            "profile_id": 4,
+            "created_at": "2016-08-29T20:04:56.477Z",
+            "updated_at": "2016-08-29T20:04:56.477Z",
+            "access_level": "level_two",
+            "key": "age",
+            "value": "18"
+        },
+        {
+            "id": 46,
+            "profile_id": 4,
+            "created_at": "2016-08-29T20:04:56.548Z",
+            "updated_at": "2016-08-29T20:04:56.548Z",
+            "access_level": "level_two",
+            "key": "first_name",
+            "value": "Myron"
+        },
+        {
+            "id": 47,
+            "profile_id": 4,
+            "created_at": "2016-08-29T20:04:56.558Z",
+            "updated_at": "2016-08-29T20:04:56.558Z",
+            "access_level": "level_one",
+            "key": "last_name",
+            "value": "Kaniuk"
+        }
+    ]
 }'
   def create
-    @info = UserInfo.new(info_params)
-    @info.data = params[:data]
-    @info.profile_id = current_user.id
-    if @info.save
-      render json: @info, status: :created
-    else
-      render json: @info.errors, status:  :unprocessable_entity
+    result = []
+    params[:user_infos].each do |info|
+      infos = UserInfo.new(profile_id: current_user.id,
+      key: info[:key],
+      value: info[:value],
+      access_level: info[:access_level])
+      if infos.save
+        result << infos
+      else
+        render json: info.errors, status:  :unprocessable_entity
+      end
     end
+    render json: { user_infos: result }, status: :created
   end
 
   api :PUT, '/profile/info', "Update an info"
   formats ['json']
   error 422, "Unprocessable Entity"
-  param_group :info_update
+  param :user_infos, Array, "Array of hashes"
+  param :access_level, ["level_one", "level_two", "level_three"], "Access level of the info"
+  param :id, :number, "Info id"
+  param :key, String
+  param :value, String
   example '
-  Request - {"id": "19", "access_level": "level_one", "data": {"age": "55", ... , "last_name": "Kaniuk"}
+  Request - {"user_infos": [
+{"id": "39", "access_level": "level_three", "key": "first_name", "value": "test1"},
+{"id": "40", "access_level": "level_three", "key": "last_neme", "value": "test"}
+]}
   Response - {
-  "access_level": "level_one",
-  "data": {
-    "age": "55",
-    ... ,
-    "last_name": "Kaniuk"
-  },
-  "id": 19,
-  "profile_id": 18,
-  "created_at": "2016-08-25T11:23:05.386Z",
-  "updated_at": "2016-08-25T13:39:07.730Z"
+    "user_infos": [
+        {
+            "id": 39,
+            "access_level": "level_three",
+            "key": "first_name",
+            "value": "test1",
+            "profile_id": 4,
+            "created_at": "2016-08-29T19:39:07.048Z",
+            "updated_at": "2016-08-30T06:21:41.083Z"
+        },
+        {
+            "id": 40,
+            "access_level": "level_three",
+            "key": "last_neme",
+            "value": "test",
+            "profile_id": 4,
+            "created_at": "2016-08-29T19:39:07.061Z",
+            "updated_at": "2016-08-30T06:18:33.255Z"
+        }
+    ]
 }'
   def update
-    @info.access_level = params[:access_level]
-    @info.data = params[:data]
-    if @info.save
-      render json: @info, status: :ok
-    else
-      render json: @info.errors, status: :unprocessable_entity
+    result = []
+    params[:user_infos].each do |info|
+      info  = UserInfo.find(info[:id])
+      if info.update(access_level: info[:access_level],
+                      key:  info[:key],
+                      value: info[:value])
+        result << info
+      else
+        render json: { errors: @info.errors }, status: :unprocessable_entity
+      end
     end
+    render json: { user_infos: result }, status: :ok
   end
 
   api :DELETE, '/profile/info', "Delete an info"
   formats ['json']
   error 422, "Unprocessable Entity"
-  param :id, :number,
+  param :id, :number, required: true
+  
   def destroy
-    if @info.destroy
+    info = UserInfo.find(params[:id])
+    if info.destroy
       head :no_content
     else
-      render json: @info.errors, status: :unprocessable_entity
+      render json: { errors: @info.errors }, status: :unprocessable_entity
     end
-  end
-
-  private
-
-  def set_info
-    @info = UserInfo.find(params[:id])
-  end
-
-  def info_params
-    params.require(:user_info).permit(:profile_id, :access_level)
   end
 end

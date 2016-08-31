@@ -1,66 +1,104 @@
 module UserInfosHelper
-	class << self
+  class << self
 
-		def index
-			'Response - {
-			  "user_info": [
-			    {
-			      "id": 12,
-			      "data": {
-			        "age": "18",
-			        "last_name": "shaman",
-			        "first_name": "test"
-			      },
-			      "profile_id": 2,
-			      "created_at": "2016-08-24T17:27:35.276Z",
-			      "updated_at": "2016-08-24T17:27:35.276Z",
-			      "access_level": "level_two"
-			    },
-			    {
-			      "id": 13,
-			      "data": {
-			        "age": "55",
-			        "last_name": "test3",
-			        "first_name": "test2"
-			      },
-			      "profile_id": 2,
-			      "created_at": "2016-08-25T06:53:08.217Z",
-			      "updated_at": "2016-08-25T06:53:08.217Z",
-			      "access_level": "level_two"
-			    }
-			  ]'
-		end
+    def index
+    'Response - {
+      "user_info": [
+        {
+          "id": 36,
+          "profile_id": 4,
+          "created_at": "2016-08-29T19:37:30.488Z",
+          "updated_at": "2016-08-30T06:10:48.441Z",
+          "access_level": "level_three",
+          "key": "first_name",
+          "value": "shaman"
+        },
+        {
+          "id": 40,
+          "profile_id": 4,
+          "created_at": "2016-08-29T19:39:07.061Z",
+          "updated_at": "2016-08-30T06:18:33.255Z",
+          "access_level": "level_three",
+          "key": "last_neme",
+          "value": "test"
+        },
+        {
+          "id": 39,
+          "profile_id": 4,
+          "created_at": "2016-08-29T19:39:07.048Z",
+          "updated_at": "2016-08-30T06:21:41.083Z",
+          "access_level": "level_three",
+          "key": "first_name",
+          "value": "test1"
+        }
+    ]
+}'
+    end
 
-		def create
-		  'Request - {"profile_id": "18", "access_level": "level_two", "data": {"age": "55", ... , "last_name": "Kaniuk"}
-		  Response - {
-		  "id": 19,
-		  "data": {
-		    "age": "55",
-		    ... ,
-		    "last_name": "Kaniuk"
-		  },
-		  "profile_id": "18",
-		  "created_at": "2016-08-25T11:23:05.386Z",
-		  "updated_at": "2016-08-25T11:23:05.386Z",
-		  "access_level": "level_two"
-		}'
-		end
+    def create
+      'Request - {"user_infos": [
+                   {"key": "age", "value": "18", "access_level": "level_two"},
+                   {"key": "first_name", "value": "Myron", "access_level": "level_two"},
+                   {"key": "last_name", "value": "Kaniuk", "access_level": "level_one"}
+]}
+      Response - {
+        "user_infos": [
+        {
+          "id": 45,
+          "profile_id": 4,
+          "created_at": "2016-08-29T20:04:56.477Z",
+          "updated_at": "2016-08-29T20:04:56.477Z",
+          "access_level": "level_two",
+          "key": "age",
+          "value": "18"
+        },
+        {
+          "id": 46,
+          "profile_id": 4,
+          "created_at": "2016-08-29T20:04:56.548Z",
+          "updated_at": "2016-08-29T20:04:56.548Z",
+          "access_level": "level_two",
+          "key": "first_name",
+          "value": "Myron"
+        },
+        {
+            "id": 47,
+            "profile_id": 4,
+            "created_at": "2016-08-29T20:04:56.558Z",
+            "updated_at": "2016-08-29T20:04:56.558Z",
+            "access_level": "level_one",
+            "key": "last_name",
+            "value": "Kaniuk"
+        }
+    ]
+}'
+    end
 
-		def update
-			 'Request - {"id": "19", "access_level": "level_one", "data": {"age": "55", ... , "last_name": "Kaniuk"}
-			  Response - {
-			  "access_level": "level_one",
-			  "data": {
-			    "age": "55",
-			    ... ,
-			    "last_name": "Kaniuk"
-			  },
-			  "id": 19,
-			  "profile_id": 18,
-			  "created_at": "2016-08-25T11:23:05.386Z",
-			  "updated_at": "2016-08-25T13:39:07.730Z"
-			}'
-		end
-	end	 
+    def update
+      'Request - {"user_infos": [
+       {"id": "39", "access_level": "level_three", "key": "first_name", "value": "test1"},
+       {"id": "40", "access_level": "level_three", "key": "last_neme", "value": "test"}
+]}
+Response - {
+  "user_infos": [{
+    "id": 39,
+    "access_level": "level_three",
+    "key": "first_name",
+    "value": "test1",
+    "profile_id": 4,
+    "created_at": "2016-08-29T19:39:07.048Z",
+    "updated_at": "2016-08-30T06:21:41.083Z"
+  },
+  {
+    "id": 40,
+    "access_level": "level_three",
+    "key": "last_neme",
+    "value": "test",
+    "profile_id": 4,
+    "created_at": "2016-08-29T19:39:07.061Z",
+    "updated_at": "2016-08-30T06:18:33.255Z"
+  }]
+}'
+    end
+  end 
 end

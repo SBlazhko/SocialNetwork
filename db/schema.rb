@@ -24,12 +24,20 @@ ActiveRecord::Schema.define(version: 20160829185450) do
     t.datetime "file_updated_at"
   end
 
+  create_table "chat_rooms", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "profile_id"
+    t.integer  "users",      default: [],              array: true
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
+
   create_table "messages", force: :cascade do |t|
-    t.string   "text"
+    t.integer  "chat_room_id"
     t.integer  "sender_id"
-    t.integer  "receiver_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "text"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "posts", force: :cascade do |t|

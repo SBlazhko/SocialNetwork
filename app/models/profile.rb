@@ -8,6 +8,8 @@ class Profile < ApplicationRecord
 	has_many :posts, dependent: :destroy
 	has_many :attachment_files
 	has_many :user_infos
+	has_many :messages
+	has_many :chat_rooms
 
 	validates :login, uniqueness: true, presence: true
 	validates :password, length: { minimum: 6 }, allow_blank: true

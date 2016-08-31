@@ -14,9 +14,15 @@ Rails.application.routes.draw do
         resource :post, except: [:new, :edit]
       end
 
+      resource :chat_room, only: [:create, :destroy, :show]
+      resource :message, only: [:create, :destroy]
+
       get 'profiles', to: "profiles#index"
       get 'profile/posts', to: "posts#index"
       get 'my_profile', to: "profiles#my_profile"
+      get 'chat_rooms', to: "chat_rooms#index"
+      post 'add_profile_to_chat', to: "chat_rooms#add_profile_to_chat"
+      get 'my_chats', to: "chat_rooms#my_chats"
 
       controller :tokens do
     		post "login", to: "tokens#login"
@@ -28,12 +34,6 @@ Rails.application.routes.draw do
         post 'profile/info/' => :create
         put 'profile/info/' => :update
         delete 'profile/info/' => :destroy
-      end
-
-      controller :messages do
-        get 'profile/messages/' => :index
-        post 'profile/message/' => :create
-        delete 'profile/message/' => :destroy
       end
 
       get '/get_files_list/', to: 'attachment_file#get_files_list'

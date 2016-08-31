@@ -8,6 +8,7 @@
 	error code: 401, desc: "Invalid email or password"
 	example 'Request - {"login":"examplee","password":"111111"}'
 	example 'Response - {"token": "4HkaLZUQMKWEEXHgPwUPDE28"}'
+	
 	def login 
 		if profile = Profile.find_by(login: params[:login]).try(:authenticate, params[:password])
 			token = Token.new

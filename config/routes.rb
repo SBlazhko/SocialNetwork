@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       get 'chat_rooms', to: "chat_rooms#index"
       post 'add_profile_to_chat', to: "chat_rooms#add_profile_to_chat"
       get 'my_chats', to: "chat_rooms#my_chats"
+      get 'show_all_messages', to: "chat_rooms#show_all_messages"
 
       controller :tokens do
     		post "login", to: "tokens#login"

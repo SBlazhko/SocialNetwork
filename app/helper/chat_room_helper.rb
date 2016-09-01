@@ -2,18 +2,20 @@ module ChatRoomHelper
 	class << self
 		
 		def create
-			'Request - {"chat_room" : {"title" : "Big Colts Salun :)"}}
+			'Request - {"chat_room" : {"title" : "Uzhorod", "users" : [2,4,3]}}
 
 			Response - {
-			  "id": 10,
-			  "title": "TestChat",
+			  "id": 23,
+			  "title": "Uzhorod",
 			  "profile_id": 1,
 			  "users": [
 			    1,
-			    3
+			    2,
+			    3,
+			    4
 			  ],
-			  "created_at": "2016-08-30T14:09:04.898Z",
-			  "updated_at": "2016-08-30T14:09:04.898Z"
+			  "created_at": "2016-09-01T07:11:58.574Z",
+			  "updated_at": "2016-09-01T07:11:58.574Z"
 			}'
 		end
 
@@ -92,6 +94,30 @@ module ChatRoomHelper
 		end
 
 		def show
+		    '{
+			  "chat_room": {
+			    "id": 1,
+			    "title": "Bi Colts",
+			    "profile_id": 1,
+			    "users": [
+			      1,
+			      3
+			    ],
+			    "created_at": "2016-08-31T12:48:46.392Z",
+			    "updated_at": "2016-08-31T12:48:46.392Z"
+			  },
+			  "last_message": {
+			    "id": 9,
+			    "chat_room_id": 1,
+			    "sender_id": 1,
+			    "text": "This is the last message in this chat room :)",
+			    "created_at": "2016-08-31T12:51:42.199Z",
+			    "updated_at": "2016-08-31T12:51:42.199Z"
+			  }
+			}'	
+		end
+
+		def show_all_messages
 			'{
 		  "chat_room": {
 		    "id": 10,

@@ -71,9 +71,14 @@ GEM
     coderay (1.1.1)
     concurrent-ruby (1.0.2)
     erubis (2.7.0)
+    fcm (0.0.2)
+      httparty
+      json
     ffi (1.9.14)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -97,6 +102,7 @@ GEM
     mini_portile2 (2.1.0)
     minitest (5.9.0)
     multi_json (1.12.1)
+    multi_xml (0.5.5)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (3.2.0)
@@ -192,6 +198,7 @@ DEPENDENCIES
   capistrano-passenger
   capistrano-rails
   capistrano-rbenv
+  fcm
   jbuilder (~> 2.5)
   kaminari
   listen (~> 3.0.5)

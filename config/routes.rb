@@ -36,6 +36,11 @@ Rails.application.routes.draw do
         delete 'profile/info/' => :destroy
       end
 
+      controller :devices do
+        post 'profile/push' => :puch_enabled
+        post 'profile/device' => :create
+      end
+
       get '/get_files_list/', to: 'attachment_file#get_files_list'
       delete '/destroy_file', to: 'attachment_file#destroy_file'
       get '/get_file', to: 'attachment_file#get_file'

@@ -1,5 +1,6 @@
 # User Info
 class Api::V1::UserInfosController < ApplicationController
+  before_action :push_infos, only: [:create]
 
   api :GET, 'profile/info/', "Show user infos"
   formats ['json']
@@ -40,6 +41,12 @@ class Api::V1::UserInfosController < ApplicationController
       access_level: info[:access_level])
       if infos.save
         result << infos
+        registration_ids = ["fl1n1H_82Ck:APA91bFjzSel7CFH61eetWR9YfEVVe6oQgsNK1bWNdp6lKG2y5D3DL5gta79NmqnMgN5kYvh9Mx3Si5yU54w9irTvTC4zbizOhvgcPTC-VHuLAlft72U2y_Co0UbITaVU5nmdIq1ZM3t"]
+        options = {"notification": {
+    "title": "Portugal vs. Denmark",
+    "text": "5 to 1"
+  }}
+        response = @fcm.send(registration_ids, options)
       else
         render json: info.errors, status:  :unprocessable_entity
       end
@@ -85,4 +92,10 @@ class Api::V1::UserInfosController < ApplicationController
       render json: { errors: @info.errors }, status: :unprocessable_entity
     end
   end
+
+  private
+  def push_infos
+     @fcm = FCM.new(Rails.application.secrets.push_server_key)
+  end
+  
 end

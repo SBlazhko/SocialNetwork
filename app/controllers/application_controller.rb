@@ -1,22 +1,22 @@
 class ApplicationController < ActionController::Base
-
   include ActionController::MimeResponds
-	
-	before_action :authenticate!
 
-	def authenticate!
-		if Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
-		else
-			render json: {errors: {invalid: ['token invalid']}}, status: 401
-		end
-	end
+  before_action :authenticate!
 
-	def current_user
-		token = Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
-		token.profile if token
-	end
+  def authenticate!
+    if Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
+    else
+      render json: {errors: {invalid: ['token invalid']}}, status: 401
+    end
+  end
 
-	def exists_receiver?
-		Profile.exists?(params[:receiver_id])
-	end
+  def current_user
+    token = Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
+    token.profile if token
+  end
+
+  def exists_receiver?
+    Profile.exists?(params[:receiver_id])
+  end
+  
 end

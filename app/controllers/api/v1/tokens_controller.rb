@@ -1,4 +1,4 @@
-	class Api::V1::TokensController < ApplicationController
+class Api::V1::TokensController < ApplicationController
 
 	skip_before_action :authenticate!
 
@@ -8,11 +8,11 @@
 	error code: 401, desc: "Invalid email or password"
 	example 'Request - {"login":"examplee","password":"111111"}'
 	example 'Response - {"token": "4HkaLZUQMKWEEXHgPwUPDE28"}'
-	
-	def login 
+
+	def login
 		if profile = Profile.find_by(login: params[:login]).try(:authenticate, params[:password])
 			token = Token.new
-			token.token = token.generate_unique_secure_token 
+			token.token = token.generate_unique_secure_token
 			token.profile_id = profile.id
 		respond_to do |format|
 			if token.save
@@ -22,8 +22,8 @@
 			end
 		end
 		else
-			render json: { errors: {invalid: "Invalid login or password"} }, status: 401 
-		end 
+			render json: { errors: {invalid: "Invalid login or password"} }, status: 401
+		end
 	end
 
 	api :POST, 'logout', "Destroy profile token(logout)"
@@ -34,7 +34,7 @@
 	    if token.destroy
 	    	render json: {}, status: 204
 	    else
-	    	render json: {errors: {not_found: "Token not found"}}, status: 422 
+	    	render json: {errors: {not_found: "Token not found"}}, status: 422
 	    end
 	end
 end

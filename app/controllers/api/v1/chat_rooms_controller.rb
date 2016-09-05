@@ -30,7 +30,7 @@ class Api::V1::ChatRoomsController < ApplicationController
 		render json: ChatRoom.all, status: 200
 	end
 
-	api :GET, 'chat_room_all_messages', 'Show ChatRoom with messages'
+	api :GET, 'show_all_messages', 'Show ChatRoom with messages'
 	param :chat_room_id, :number, 'ChatRoom id (query param)'
 	param :page, :number, 'Page number (query param)'
 	example ChatRoomHelper.show_all_messages

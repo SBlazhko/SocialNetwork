@@ -1,5 +1,6 @@
 class Api::V1::TokensController < ApplicationController
 
+	before_action :push_token_destroy, only: [:logout] 
 	skip_before_action :authenticate!
 
 	api :POST, 'login', "Generate new user token"
@@ -32,9 +33,17 @@ class Api::V1::TokensController < ApplicationController
 	def logout
 		token = Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
 	    if token.destroy
-	    	render json: {}, status: 204
+				render json: {}, status: 204
 	    else
 	    	render json: {errors: {not_found: "Token not found"}}, status: 422
 	    end
 	end
+
+	private
+	def push_token_destroy
+		profile = Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
+		device = Device.find_by(profile_id: profile.profile_id)
+		device.destroy
+	end
+
 end

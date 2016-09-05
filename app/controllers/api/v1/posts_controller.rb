@@ -16,8 +16,7 @@ class  Api::V1::PostsController < ApplicationController
 	example PostHelper.create
 
 	def create
-		post = Post.new(post_params)
-		post.profile_id = current_user.id
+		post = current_user.posts.new(post_params)
 		if post.save
 			render json: post.post_show_params, status: 201
 		else

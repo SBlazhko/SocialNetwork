@@ -1,6 +1,6 @@
 class Api::V1::MessagesController < ApplicationController
   before_action :push_message_new, only: [:create]
-  before_action :get_chat_room, only: [:create, :check_message_access?, :get_users_token]
+  before_action :get_chat_room, only: [:create, :get_users_token]
 
 
   api :POST, 'message', 'Create new message'
@@ -12,16 +12,16 @@ class Api::V1::MessagesController < ApplicationController
     message.chat_room_id = @chat_room.id
     message.sender_id = current_user.id
 
-    if check_message_access?
-      if message.save
-        registration_ids = get_users_token()
-        options = {notification: { title: @chat_room.title,
-                                   text: params[:text][0, 50] }}
-        response = @fcm.send(registration_ids, options)
-        render json: message.message_show_params, status: 201
-      else
-        render json: {errors: message.errors}, status: 400
-      end
+    if @chat_room.users.include?(current_user.id)
+        if message.save
+          registration_ids = get_users_token()
+          options = {notification: { title: @chat_room.title,
+                                     text: params[:text][0, 50] }}
+          @fcm.send(registration_ids, options)
+          render json: message.message_show_params, status: 201
+        else
+          render json: {errors: message.errors}, status: 400
+        end
     else
       render json: {errors: {user: "access failed"}}
     end
@@ -45,15 +45,6 @@ class Api::V1::MessagesController < ApplicationController
     params.require(:message).permit(:text)
   end
 
-  def check_message_access?
-    @chat_room.users.each do |u|
-      if u == current_user.id
-        return true
-      end
-    end
-    return false
-  end
-
   def get_users_token
     @arr_profile_token = []
     chat_room = @chat_room
@@ -73,5 +64,4 @@ class Api::V1::MessagesController < ApplicationController
   def push_message_new
     @fcm = FCM.new(Rails.application.secrets.push_server_key)
   end
-
 end

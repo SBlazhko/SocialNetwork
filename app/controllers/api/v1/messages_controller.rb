@@ -9,7 +9,7 @@ class Api::V1::MessagesController < ApplicationController
     message.chat_room_id = ChatRoom.find_by(id: params[:chat_room_id]).id
     message.sender_id = current_user.id
 
-    if chat_room.users.include?(current_user.id)
+    if ChatRoom.find_by(id: params[:chat_room_id]).users.include?(current_user.id)
         if message.save
           render json: message.message_show_params, status: 201
         else

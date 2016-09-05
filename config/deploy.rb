@@ -42,6 +42,7 @@ set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', '
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+set :passenger_restart_command,  ->{ "passenger-config restart-app --instance Aigb4gg9" }
 namespace :deploy do
 
   after :restart, :clear_cache do
@@ -52,5 +53,6 @@ namespace :deploy do
       # end
     end
   end
+
 
 end

@@ -1,6 +1,6 @@
 class Api::V1::TokensController < ApplicationController
-
-	before_action :push_token_destroy, only: [:logout] 
+  before_action :get_profile_id, only: [:login, :logout]
+  after_action :device_push_token_create, only: [:login]
 	skip_before_action :authenticate!
 
 	api :POST, 'login', "Generate new user token"
@@ -40,10 +40,13 @@ class Api::V1::TokensController < ApplicationController
 	end
 
 	private
-	def push_token_destroy
-		profile = Token.find_by(token: request.headers["HTTP_AUTHORIZATION"])
-		device = Device.find_by(profile_id: profile.profile_id)
-		device.destroy
-	end
+  def get_profile_id
+    @profile_id = Token.find_by(token: request.headers["HTTP_AUTHORIZATION"]).profile_id
+  end
+
+  def device_push_token_create
+    @device = Device.new(profile_id: @profile_id, token: params[:push_token], platform: params[:platform])
+    @device.save
+  end
 
 end

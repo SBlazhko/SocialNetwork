@@ -16,18 +16,17 @@ class Api::V1::DevicesController < ApplicationController
     end
   end
 
-  api :POST, 'profile/send_push', "Create a device token"
-  formats ['json']
-  param :profile_id, :number, required: true
-  param :token, String, required: true
-  param :platform, ['android', 'ios'], required: true
-  def create
-    @device = Device.new(device_params)
+  def device_push_token_create(profile_id, push_token, paltform)
+    @device = Device.create(profile_id: profile_id, token: token, paltform: paltform)
     if @device.save
-      render json: { device: @devise }, status: :ok
+      true
     else
-      render json: { errors: @device.errors }, status: :unprocessable_entity
+      false
     end
+  end
+
+  def device_push_token_destroy()
+
   end
 
   private

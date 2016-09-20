@@ -28,15 +28,12 @@ class  Api::V1::ProfilesController < ApplicationController
 	end
 
 	api :POST, 'profile', "Create new profile"
-	param :profile, Hash, "Profile Hash", required: true do
-		param :login, String, "Unique profile login", required: true
-		param :password, String, "Profile password, minimum 6 symbols", required: true
-	end
+	param :login, String, "Unique profile login", required: true
+	param :password, String, "Profile password, minimum 6 symbols", required: true
 	example ProfileHelper.create
 
 	def create
-		profile = Profile.new(profile_params)
-		profile.save
+		profile = Profile.create(login: params[:login], password: params[:password])
 		token = Token.new
 		token.profile_id = profile.id
 		token.token = token.generate_unique_secure_token

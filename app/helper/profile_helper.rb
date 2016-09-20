@@ -34,7 +34,7 @@ module ProfileHelper
 		end
 
 		def create
-		'Request - {"profile" : {"login":"test", "password":"111111"}} 
+		'Request - {"login":"test", "password":"111111"} 
 
 		Response - {"profile": {
 		"id": 13,
